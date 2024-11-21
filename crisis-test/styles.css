@@ -1,0 +1,253 @@
+/* Font Import */
+@font-face {
+    font-family: "SanFrancisco";
+    src: url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff2") format("woff2"),
+         url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff") format("woff");
+}
+
+/* General Styling */
+body {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-weight: normal;
+    margin: 0;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 1rem;
+}
+
+h1, h2 {
+    font-weight: normal;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: #666;
+    border-bottom: 1px solid #e5e5ea;
+    padding-bottom: 1.5rem;
+}
+
+/* Text Elements */
+.comment {
+    color: #222;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+    padding: 0;
+}
+
+p {
+    margin: 5px 0;
+    transform: translateY(-20px);
+    transition: transform 0.5s ease;
+    cursor: default;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: help;
+    text-decoration: underline;
+}
+
+/* Button and Input Styling */
+button {
+    border: none;
+    background-color: #248bf5;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    padding: 10px 200px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+    border: #248bf5 solid 1px;
+    transition: color 0.3s ease, border 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: white;
+    color: #248bf5;
+    border: #248bf5 solid 1px;
+    transition: all 0.3s ease;
+}
+
+input {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px;
+    width: 50px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #00bcd4;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+form label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+form input {
+    flex: 0 0 50px;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+.calltoaction {
+    text-align: center;
+    justify-content: center;
+}
+
+.margin-b_none {
+    margin-bottom: 0 !important;
+}
+
+.margin-b_one {
+    margin-bottom: 1rem !important;
+}
+
+.margin-t_one {
+    margin-top: 1rem !important;
+}
+
+/* Messaging Styles */
+.imessage {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    font-family: "SanFrancisco";
+    font-size: 1.25rem;
+    margin: 0 auto 1rem;
+    max-width: 600px;
+    padding: 0.5rem 1.5rem;
+}
+
+.imessage p {
+    border-radius: 1.15rem;
+    line-height: 1.25;
+    max-width: 75%;
+    padding: 0.5rem .875rem;
+    position: relative;
+    word-wrap: break-word;
+}
+
+/* Message Tails */
+.imessage p::before, .imessage p::after {
+    bottom: -0.1rem;
+    content: "";
+    height: 1rem;
+    position: absolute;
+}
+
+/* Message from Me */
+p.from-me {
+    align-self: flex-end;
+    background-color: #248bf5;
+    color: #fff;
+}
+
+p.from-me::before {
+    border-bottom-left-radius: 0.8rem 0.7rem;
+    border-right: 1rem solid #248bf5;
+    right: -0.35rem;
+    transform: translate(0, -0.1rem);
+}
+
+p.from-me::after {
+    background-color: #fff;
+    border-bottom-left-radius: 0.5rem;
+    right: -40px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+}
+
+/* Message from Them */
+p.from-them {
+    align-items: flex-start;
+    background-color: #e5e5ea;
+    color: #000;
+}
+
+p.from-them::before {
+    border-bottom-right-radius: 0.8rem 0.7rem;
+    border-left: 1rem solid #e5e5ea;
+    left: -0.35rem;
+    transform: translate(0, -0.1rem);
+}
+
+p.from-them::after {
+    background-color: #fff;
+    border-bottom-right-radius: 0.5rem;
+    left: 20px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+}
+
+/* Emoji Styling */
+p[class^="from-"].emoji {
+    background: none;
+    font-size: 2.5rem;
+}
+
+p[class^="from-"].emoji::before {
+    content: none;
+}
+
+/* Message Tail Control */
+.no-tail::before {
+    display: none;
+}
+
+/* Media Query for Small Screens */
+@media screen and (max-width: 800px) {
+    body {
+        margin: 0 0.5rem;
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+    .imessage {
+        font-size: 1.05rem;
+        padding: 0.25rem 0.875rem;
+    }
+
+    .imessage p {
+        margin: 0.5rem 0;
+    }
+}
+

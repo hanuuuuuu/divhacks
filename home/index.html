@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro</title>
+    <link rel="stylesheet" href="/home/styles.css">
+</head>
+<body>
+    <div class="imessage">
+        <p class="from-me-a margin-b_none">yo kadi</p>
+        <p class="from-me">quick question</p>
+        <p class="from-them">Hey Moe Wassup</p>
+        <p class="from-me-a">what was it like</p>
+        <p class="from-me">growing up with sickle cell</p>
+        <p class="from-them-a margin-b_none">Growing up with sickle cell disease was painful.</p>
+        <p class="from-them-a margin-b_none">I spent many nights in the ICU during my childhood, which was far from enjoyable. Unfortunately, I missed out on school dances and trips, as my condition significantly impacted my attendance due to frequent hospitalizations and medical appointments.</p>
+        <p class="from-them-a margin-b_none">Managing sickle cell required <span class="word" id="medication">medication</span>, staying <span class="word" id="hydrated">well-hydrated</span>, and limiting my participation in <span class="word" id="sports">sports</span>. I also had to avoid environments that were <span class="word" id="temperature">too hot or too cold</span>, which made things more challenging but overall living with sickle cell disease during my formative years was quite difficult.</p>
+        <p class="from-them margin-b_none"><a href='/dashboard/index.html'>However, as I’ve grown older, I’ve learned more effective ways to manage the pain and improve my quality of life.</a></p>
+
+        <p class="calltoaction">Press the Above Message or press
+            <a class="calltoaction" id="theme-toggle">here</a> to toggle dark mode on or off.</p>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const messages = document.querySelectorAll('.imessage p');
+        let index = 0;
+
+        function showMessage() {
+            if (index < messages.length) {
+                messages[index].classList.add('show'); 
+
+                const delay = index === messages.length - 1 ? 6000 : 2000; 
+
+                index++;
+                setTimeout(showMessage, delay); 
+            } else {
+                highlightWords();
+                document.querySelector('.imessage').classList.add('animation-complete');
+            }
+        }
+
+        function highlightWords() {
+            const wordsToHighlight = [
+                { id: 'medication', duration: 2000 },
+                { id: 'hydrated', duration: 2000 },
+                { id: 'sports', duration: 2000 },
+                { id: 'temperature', duration: 2000 }
+            ];
+
+            let currentIndex = 0;
+
+            function highlightNextWord() {
+                if (currentIndex < wordsToHighlight.length) {
+                    const word = document.getElementById(wordsToHighlight[currentIndex].id);
+                    word.classList.add('highlight'); 
+
+                    setTimeout(() => {
+                        word.classList.remove('highlight'); 
+                        highlightNextWord(); 
+                    }, wordsToHighlight[currentIndex].duration);
+                    
+                    currentIndex++;
+                }
+            }
+
+            highlightNextWord(); 
+        }
+
+        if (!localStorage.getItem('animationShown')) {
+            showMessage();
+            localStorage.setItem('animationShown', 'true');
+        } else {
+            messages.forEach(message => message.classList.add('show'));
+            document.querySelector('.imessage').classList.add('animation-complete');
+        }
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    });
+</script>
+
+    
+</body>
+</html>

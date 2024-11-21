@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>   
+    <form id="crisisForm">
+        <div class="imessage">
+            <p class="from-them margin-b_none">Sometimes simple tests and surveys help you determine if you want to get serious help...</p>
+            <p class="from-them"><a href='/home/index.html'><b>Press this message to go back home.</b></a></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="hydration_level">Let's start with a few questions: On a scale of 0 to 10, how would you rate your hydration level?</label>
+            </p>
+            <p class="from-me">I think I’d give it around a <input type="number" id="hydration_level" name="hydration_level" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="physical_activity">How active have you been lately? Rate your physical activity from 0 to 10.</label>
+            </p>
+            <p class="from-me">I’d say it's about a <input type="number" id="physical_activity" name="physical_activity" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="temperature_exposure">How comfortable have you felt with temperature changes? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I would rate it around a <input type="number" id="temperature_exposure" name="temperature_exposure" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="sleep_quality">How would you rate your sleep quality? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I think it's about a <input type="number" id="sleep_quality" name="sleep_quality" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="medication_adherence">How well have you been adhering to your medication schedule? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd rate it around a <input type="number" id="medication_adherence" name="medication_adherence" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="pain">How much pain have you been experiencing? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd say it's about a <input type="number" id="pain" name="pain" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="weakness">How much weakness have you felt? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd rate it around a <input type="number" id="weakness" name="weakness" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="headache">How often have you had headaches? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd say it's about a <input type="number" id="headache" name="headache" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="dizziness">How often have you felt dizzy? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd rate it around a <input type="number" id="dizziness" name="dizziness" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="jaundice">Have you noticed any signs of jaundice? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd say it's about a <input type="number" id="jaundice" name="jaundice" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="swelling">How much swelling have you experienced? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd rate it around a <input type="number" id="swelling" name="swelling" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="shortness_of_breath">How often have you experienced shortness of breath? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd say it's about a <input type="number" id="shortness_of_breath" name="shortness_of_breath" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="fever">How often have you had a fever? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd rate it around a <input type="number" id="fever" name="fever" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="chest_pain">How often have you experienced chest pain? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd say it's about a <input type="number" id="chest_pain" name="chest_pain" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="vision_problems">How often have you had vision problems? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd rate it around a <input type="number" id="vision_problems" name="vision_problems" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="erection">How often have you had issues with erection? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd say it's about a <input type="number" id="erection" name="erection" max="10" min="0" required></p>
+        
+            <p class="from-them margin-b_none">
+                <label for="stroke_symptoms">Have you experienced any stroke symptoms? Rate from 0 to 10.</label>
+            </p>
+            <p class="from-me">I'd rate it around a <input type="number" id="stroke_symptoms" name="stroke_symptoms" max="10" min="0" required></p>
+        </div>
+        <p class="calltoaction"><button type="button" onclick="submitForm()">Submit</button></p>
+    </form>
+    
+    <script src="script.js"></script>
+</body>
+</html>

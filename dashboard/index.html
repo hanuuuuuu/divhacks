@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="imessage">
+        <p class="from-them margin-b_one">There are certain steps you can take to maintain your health, especially as someone with SCD...</p>
+        <p class="from-me">Like what?</p>
+        <p class="from-them-a margin-b_none">You can:</p>
+        <p class="from-them-a margin-b_none"><a href='/crisis-test'>1. Take a test to make sure that you aren't closing in on to a crisis...</a></p>
+        <p class="from-them margin-b_none"><a href='/schedule'>2. Set alarms and checklists to make sure you aren't missing anything important! We all know you are forgetful...</a></p>
+        <p class="from-me no-tail emoji">😒</p>
+        <p class="from-me">caught a stray but okay</p>
+        <p class="from-them">lmao but listen! sickle cell is serious. <a href='/scd-test'>thus why there is a test that could determine whether or not you have it...</a></p>
+        <p class="from-me">so either a quick crisis check, schedule to keep me on track, or a serious deep dive into the human genetics... sheeeesh these are tough choices</p>
+
+        <p class="calltoaction">Choose one of the interactive messages above. <a href='/home'><b>Back Home.</b></a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const messages = document.querySelectorAll('.imessage p');
+            let index = 0;
+
+            function showMessage() {
+                if (index < messages.length) {
+                    messages[index].classList.add('show'); 
+
+                    const delay = index === messages.length - 1 ? 2000 : 2000; 
+
+                    index++;
+                    setTimeout(showMessage, delay); 
+                } else {
+                    highlightWords();
+                    // Add a class to indicate the animation is complete
+                    document.querySelector('.imessage').classList.add('animation-complete');
+                }
+            }
+
+            function highlightWords() {
+                const wordsToHighlight = [
+                    { id: 'medication', duration: 2000 },
+                    { id: 'hydrated', duration: 2000 },
+                    { id: 'sports', duration: 2000 },
+                    { id: 'temperature', duration: 2000 }
+                ];
+
+                let currentIndex = 0;
+
+                function highlightNextWord() {
+                    if (currentIndex < wordsToHighlight.length) {
+                        const word = document.getElementById(wordsToHighlight[currentIndex].id);
+                        word.classList.add('highlight'); 
+
+                        setTimeout(() => {
+                            word.classList.remove('highlight'); 
+                            highlightNextWord(); 
+                        }, wordsToHighlight[currentIndex].duration);
+                        
+                        currentIndex++;
+                    }
+                }
+
+                highlightNextWord(); 
+            }
+
+            // Check if the animation has already been shown
+            if (!localStorage.getItem('animationShown')) {
+                showMessage();
+                // Set the flag in localStorage
+                localStorage.setItem('animationShown', 'true');
+            } else {
+                // Directly apply the final state if the animation has already been shown
+                messages.forEach(message => message.classList.add('show'));
+                document.querySelector('.imessage').classList.add('animation-complete');
+            }
+        });
+    </script>
+    <script src="/theme.js"></script>
+</body>
+</html>

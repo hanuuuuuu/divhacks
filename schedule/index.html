@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Planner</title>
+    <style>
+        body {
+            color: white; 
+            font-family: Arial, Helvetica, sans-serif; 
+        }
+
+        button {
+            border: none;
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.25rem;
+        }
+        input {
+            background-color: transparent; 
+            color: white; 
+            border: 1px solid white; 
+            border-radius: 5px;
+            padding: 5px; 
+            width: 50px;
+            outline: none; 
+        }
+
+        input:focus {
+            border-color: #00bcd4; 
+        }
+
+        .hidden {
+            display: none;
+        }
+        .imessage {
+            background-color: #fff;
+            border-radius: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            font-family: "SanFrancisco";
+            font-size: 1.25rem;
+            margin: 0 auto 1rem;
+            max-width: 600px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .imessage p {
+            border-radius: 1.15rem;
+            line-height: 1.25;
+            max-width: 75%;
+            padding: 0.5rem .875rem;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .imessage p::before,
+        .imessage p::after {
+            bottom: -0.1rem;
+            content: "";
+            height: 1rem;
+            position: absolute;
+        }
+
+        p.from-me {
+            align-self: flex-end;
+            background-color: #248bf5;
+            color: #fff; 
+        }
+
+        p.from-me::before {
+            border-bottom-left-radius: 0.8rem 0.7rem;
+            border-right: 1rem solid #248bf5;
+            right: -0.35rem;
+            transform: translate(0, -0.1rem);
+        }
+
+        p.from-me::after {
+            background-color: #fff;
+            border-bottom-left-radius: 0.5rem;
+            right: -40px;
+            transform:translate(-30px, -2px);
+            width: 10px;
+        }
+
+        p[class^="from-"] {
+            margin: 0.5rem 0;
+            width: fit-content;
+        }
+
+        p.from-me ~ p.from-me {
+            margin: 0.25rem 0 0;
+        }
+
+        p.from-me ~ p.from-me:not(:last-child) {
+            margin: 0.25rem 0 0;
+        }
+
+        p.from-me ~ p.from-me:last-child {
+            margin-bottom: 0.5rem;
+        }
+
+        p.from-them {
+            align-items: flex-start;
+            background-color: #e5e5ea;
+            color: #000;
+        }
+
+        p.from-them:before {
+            border-bottom-right-radius: 0.8rem 0.7rem;
+            border-left: 1rem solid #e5e5ea;
+            left: -0.35rem;
+            transform: translate(0, -0.1rem);
+        }
+
+        p.from-them::after {
+            background-color: #fff;
+            border-bottom-right-radius: 0.5rem;
+            left: 20px;
+            transform: translate(-30px, -2px);
+            width: 10px;
+        }
+
+        p[class^="from-"].emoji {
+            background: none;
+            font-size: 2.5rem;
+        }
+
+        p[class^="from-"].emoji::before {
+            content: none;
+        }
+
+        .margin-b_none {
+            margin-bottom: 0 !important;
+        }
+
+        .margin-b_one {
+            margin-bottom: 1rem !important;
+        }
+
+        .margin-t_one {
+            margin-top: 1rem !important;
+        }
+
+        p {
+            margin: 5px 0;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease; 
+        }
+
+        p.show {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .highlight {
+            background-color: lightyellow;
+            transition: background-color 0.5s ease; 
+        }
+
+        .calltoaction {
+            text-align: center;
+        }
+
+        @font-face {
+            font-family: "SanFrancisco";
+            src:
+                url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff2") format("woff2"),
+                url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff") format("woff");
+        }
+
+        @media screen and (max-width: 800px) {
+            body {
+                margin: 0 0.5rem;
+            }
+
+            .container {
+                padding: 0.5rem;
+            }
+
+            .imessage {
+                font-size: 1.05rem;
+                margin: 0 auto 1rem;
+                max-width: 600px;
+                padding: 0.25rem 0.875rem;
+            }
+
+            .imessage p {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="imessage">
+        <p class="from-them margin-b_none">Let's create your daily schedule! Remember to include your medication times and rest periods. What time do you usually wake up?</p>
+        
+        <p class="from-me margin-b_none">I wake up at <input type="time" id="wake-time" required></p>
+
+        <p class="from-them margin-b_none">Great! You should take your morning medications right after waking up. What medications do you need to take?</p>
+
+        <p class="from-me margin-b_none">I need to take <input type="text" id="morning-meds" placeholder="Morning medications"></p>
+
+        <p class="from-them margin-b_none">It's important to have a good breakfast after your morning medications. What time would you like to have breakfast?</p>
+
+        <p class="from-me margin-b_none">I'll have breakfast at <input type="time" id="breakfast-time"></p>
+
+        <p class="from-them margin-b_none">Let's schedule some light morning activities. What would you like to do? Remember to avoid overexertion.</p>
+
+        <p class="from-me margin-b_none">I plan to <input type="text" id="morning-activity" placeholder="Morning activities"></p>
+
+        <p class="from-them margin-b_none">Don't forget to stay hydrated! When would you like your first water reminder?</p>
+
+        <p class="from-me margin-b_none">Remind me at <input type="time" id="water-reminder1"></p>
+
+        <p class="from-them margin-b_none">What time would you like to have lunch? Remember to take any midday medications.</p>
+
+        <p class="from-me margin-b_none">Lunch time at <input type="time" id="lunch-time"></p>
+
+        <p class="from-them margin-b_none">It's important to rest after lunch. How long would you like your rest period to be?</p>
+
+        <p class="from-me margin-b_none">I'll rest for <input type="number" id="rest-duration" min="30" max="180" placeholder="minutes"></p>
+
+        <p class="from-them margin-b_none">Any afternoon appointments or activities you need to schedule?</p>
+
+        <p class="from-me margin-b_none">Yes, I have <input type="text" id="afternoon-activities" placeholder="Afternoon plans"></p>
+
+        <p class="from-them margin-b_none">What time would you like dinner?</p>
+
+        <p class="from-me margin-b_none">Dinner time at <input type="time" id="dinner-time"></p>
+
+        <p class="from-them margin-b_none">Finally, what time do you plan to take evening medications and go to bed?</p>
+
+        <p class="from-me margin-b_none">Evening meds at <input type="time" id="evening-meds-time"> and bedtime at <input type="time" id="bedtime"></p>
+
+        <p class="calltoaction">
+            <button onclick="generateSchedule()">Create My Schedule</button>
+        </p>
+
+        <div id="schedule-summary" class="hidden">
+            <p class="from-them margin-b_none">Here's your schedule for the day:</p>
+        </div>
+    </div>
+
+    <!-- <script>
+        const messages = document.querySelectorAll('.imessage p');
+        let index = 0;
+
+        function showMessage() {
+            if (index < messages.length) {
+                messages[index].classList.add('show'); 
+                index++;
+                setTimeout(showMessage, 500); 
+            }
+        }
+
+        showMessage();
+
+        async function validateAndProgress(index) {
+            // Get the current message and input field
+            const message = messages[index];
+            message.classList.add('show'); // Show the current message
+
+            // Wait for the user to input data
+            await new Promise(resolve => {
+                const inputField = message.querySelector('input');
+                inputField.addEventListener('input', () => {
+                    const inputValue = inputField.value;
+                    if (inputValue !== '') {
+                        resolve();
+                    }
+                });
+            });
+
+            // Progress to the next message
+            if (index < messages.length - 1) {
+                messages[index + 1].classList.add('show'); // Show the next message
+            }
+        }
+
+        function generateSchedule() {
+            const summary = document.getElementById('schedule-summary');
+            summary.classList.remove('hidden');
+
+            const scheduleItems = [
+                {time: document.getElementById('wake-time').value, activity: "Wake up"},
+                {time: document.getElementById('wake-time').value, activity: "Take morning medications: " + document.getElementById('morning-meds').value},
+                {time: document.getElementById('breakfast-time').value, activity: "Breakfast"},
+                {time: document.getElementById('water-reminder1').value, activity: "Water reminder"},
+                {time: document.getElementById('lunch-time').value, activity: "Lunch"},
+                {time: document.getElementById('dinner-time').value, activity: "Dinner"},
+                {time: document.getElementById('evening-meds-time').value, activity: "Evening medications"},
+                {time: document.getElementById('bedtime').value, activity: "Bedtime"}
+            ];
+
+            const sortedSchedule = scheduleItems.sort((a, b) => a.time.localeCompare(b.time));
+
+            sortedSchedule.forEach(item => {
+                if (item.time && item.activity) {
+                    const scheduleEntry = document.createElement('p');
+                    scheduleEntry.className = 'from-them margin-b_none';
+                    scheduleEntry.textContent = `${item.time} - ${item.activity}`;
+                    summary.appendChild(scheduleEntry);
+                }
+            });
+
+            const finalReminder = document.createElement('p');
+            finalReminder.className = 'from-them margin-b_none';
+            finalReminder.textContent = "Remember to stay hydrated throughout the day and rest when needed. If you experience any crisis symptoms, contact your healthcare provider immediately.";
+            summary.appendChild(finalReminder);
+        }
+        
+    </script> -->
+    <script>
+        const messages = document.querySelectorAll('.imessage p');
+        let index = 0;
+    
+        function showMessage() {
+            if (index < 2) {
+                messages[index].classList.add('show');
+                index++;
+            } else if (index === 2) {
+                messages[index].classList.add('show');
+                index++;
+                validateAndProgress(index);
+            }
+        }
+    
+        function validateAndProgress(index) {
+            // Get the current message and input field
+            const message = messages[index];
+            const inputField = message.querySelector('input');
+    
+            // Add an event listener to the input field
+            inputField.addEventListener('input', () => {
+                // Show the next message
+                if (index < messages.length - 1) {
+                    messages[index + 1].classList.add('show');
+                }
+            });
+        }
+    
+        function generateSchedule() {
+            // Get the input values
+            const restDuration = document.getElementById('rest-duration').value;
+            const afternoonActivities = document.getElementById('afternoon-activities').value;
+            const dinnerTime = document.getElementById('dinner-time').value;
+            const eveningMedsTime = document.getElementById('evening-meds-time').value;
+            const bedtime = document.getElementById('bedtime').value;
+    
+            // Display the schedule summary
+            const scheduleSummary = document.getElementById('schedule-summary');
+            scheduleSummary.classList.remove('hidden');
+            scheduleSummary.innerHTML = `
+                <p class="from-them margin-b-none">Here's your schedule for the day:</p>
+                <p class="from-me margin-b-none">Breakfast at 7 AM</p>
+                <p class="from-me margin-b-none">Morning medications at 8 AM</p>
+                <p class="from-me margin-b-none">Rest period of ${restDuration} minutes</p>
+                <p class="from-me margin-b-none">${afternoonActivities}</p>
+                <p class="from-me margin-b-none">Dinner at ${dinnerTime}</p>
+                <p class="from-me margin-b-none">Evening medications at ${eveningMedsTime}</p>
+                <p class="from-me margin-b-none">Bedtime at ${bedtime}</p>
+            `;
+    
+            // Reset the index and show the first message
+            index = 0;
+            showMessage();
+        }
+    </script>
+</body>
+</html>
